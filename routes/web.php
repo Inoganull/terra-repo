@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Article\ArticleController;
-use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Comment\CommentController;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,7 +20,7 @@ Route::post('/comments/add', [CommentController::class, 'create']);
 Route::get('/comments/delete/{id}', [CommentController::class, 'delete']);
 
 
-Route::get('/products', [ProductController::class, 'index']);
+Route::get('/profile/{user}', [UserController::class, 'showProfile'])->name('users.profile');
 Auth::routes();
 
 Route::get('/home', [ArticleController::class, 'index']);

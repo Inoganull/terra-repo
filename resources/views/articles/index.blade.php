@@ -2,7 +2,7 @@
 
 @section("content")
     <div class="container">
-        
+
         @if(session('info'))
             <div class="alert alert-info">
                 {{ session('info') }}
@@ -27,3 +27,4 @@
         <div class="pagination mt-4">{{ $articles->links() }}</div>
     </div>
 @endsection
+

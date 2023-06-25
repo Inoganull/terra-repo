@@ -11,8 +11,8 @@
             <div class="card-body">
                 <h5 class="card-title"><strong>{{ $article->title }}</strong></h5>
                 <div class="card-subtitle mb-2 text-muted small">
-                    {{ $article->created_at->diffForHumans() }}, 
-                    By <b>{{ $article->user->name }}</b>,
+                    {{ $article->created_at->diffForHumans() }},
+                    By <a href="{{ route('users.profile', $article->user) }}"><b>{{ $article->user->name }}</b></a>,
                     Category: <b>{{ $article->category->name }}</b>
                 </div>
                 <p class="card-text">{{ $article->body }}</p>
@@ -20,12 +20,14 @@
                     Back
                 </a>
                 @auth
-                <a class="btn btn-warning" href="{{ url("/articles/detail/edit/$article->id") }}">
-                    Edit
-                </a>
-                <a class="btn btn-danger" href="{{ url("/articles/delete/$article->id") }}">
-                    Delete
-                </a>
+                    @if(auth()->check() && $article->user_id == auth()->user()->id)
+                        <a class="btn btn-warning" href="{{ url("/articles/detail/edit/$article->id") }}">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger" href="{{ url("/articles/delete/$article->id") }}">
+                            Delete
+                        </a>
+                    @endif
                 @endauth
             </div>
         </div>
@@ -39,7 +41,7 @@
                     <a href="{{ url("/comments/delete/$comment->id") }}" class="btn-close float-end" ></a>
                     {{ $comment->content }}
                     <div class="small mt-2">
-                        By <b>{{ $comment->user->name }}</b>, 
+                        By <b>{{ $comment->user->name }}</b>,
                         {{ $comment->created_at->diffForHumans() }}
                     </div>
                 </li>
