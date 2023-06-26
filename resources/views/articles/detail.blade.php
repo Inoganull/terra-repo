@@ -12,7 +12,7 @@
                 <h5 class="card-title"><strong>{{ $article->title }}</strong></h5>
                 <div class="card-subtitle mb-2 text-muted small">
                     {{ $article->created_at->diffForHumans() }},
-                    By <a href="{{ route('users.profile', $article->user) }}"><b>{{ $article->user->name }}</b></a>,
+                    <a class="nav-link text-success" href="{{ url('profile', $article->user) }}"><b>{{ $article->user->name }}</b></a>,
                     Category: <b>{{ $article->category->name }}</b>
                 </div>
                 <p class="card-text">{{ $article->body }}</p>
